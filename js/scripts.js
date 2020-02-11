@@ -1,10 +1,11 @@
-const url = 'https://newsapi.org/v2/top-headlines?country=br&apiKey=61a2c1782069428b8b913bfd8cf962a7'
-let rowNoticias = document.querySelector('.noticias')
+const url = 'https://newsapi.org/v2/top-headlines?country=mx&apiKey=61a2c1782069428b8b913bfd8cf962a7'
+let rowNoticias = document.querySelector('.row')
 let config = {
     method: 'get'
 }
 
 const mostrarNaTela = (listaNoticias) => {
+    rowNoticias.innerHTML = ''
     listaNoticias.forEach((noticia) => {
         const cardNoticia =
             `<div class="col-md-4 mb-2">
