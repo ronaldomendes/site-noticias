@@ -1,10 +1,18 @@
-const url = 'https://newsapi.org/v2/top-headlines?country=br&apiKey=61a2c1782069428b8b913bfd8cf962a7'
-let rowNoticias = document.querySelector('.noticias')
-let config = {
+const apiKey = '61a2c1782069428b8b913bfd8cf962a7'
+const country = document.querySelector('#paisNoticia')
+const category = document.querySelector('#categoriaNoticia')
+const rowNoticias = document.querySelector('.noticias')
+const config = {
     method: 'get'
 }
 
+const getUrl = (country, category) => {
+    const url = `https://newsapi.org/v2/top-headlines?country=${country.value}&category=${category.value}&apiKey=${apiKey}`
+    return url
+}
+
 const mostrarNaTela = (listaNoticias) => {
+    rowNoticias.innerHTML = ''
     listaNoticias.forEach((noticia) => {
         const cardNoticia =
             `<div class="col-md-4 mb-2">
@@ -18,17 +26,13 @@ const mostrarNaTela = (listaNoticias) => {
                 </div>
             </div>`
         rowNoticias.insertAdjacentHTML('beforeend', cardNoticia)
-
     })
 }
 
 document.querySelector('button').onclick = () => {
-    /*let result = */fetch(url, config)
+    fetch(getUrl(country, category), config)
         .then((resp) => resp.json())
-        // .then((json) => json)
         .then((json) => {
-            // console.log(json.articles[1])
             mostrarNaTela(json.articles)
         })
-    // console.log(result)
 }
